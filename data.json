@@ -1,0 +1,22 @@
+[   
+    {
+        "process_id": "process1",
+        "arrival_time": 7,
+        "burst_time": 5
+    },
+    {
+        "process_id": "process2",
+        "arrival_time": 2,
+        "burst_time": 6
+    },
+    {
+        "process_id": "process3",
+        "arrival_time": 5,
+        "burst_time": 10
+    },
+    {
+        "process_id": "process4",
+        "arrival_time": 30,
+        "burst_time": 5
+    }
+]

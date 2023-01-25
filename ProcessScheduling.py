@@ -32,7 +32,7 @@ class ProcessHandler:
         self.processes = []
 
     def create_processes(self):
-        data = data_handler.read_data()
+        data = data_handler.read_data("process_data.json")
         for process in data:
             process_id = process['process_id']
             arrival_time = process['arrival_time']

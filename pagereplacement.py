@@ -46,25 +46,53 @@ class FIFOHandler:
         for slot in self.slots: # for each possible slot size
             current_slots = []
 
-            for page in self.page_list: 
-                if slot.size > len(current_slots):
-                    current_slots.append(page.id)
-                    
-                else:
+            for page in self.page_list:
+                
+                if not slot.size > len(current_slots):
+
                     if page.id not in current_slots:
                         current_slots.pop(0)
-                        current_slots.append(page.id)
+
+                current_slots.append(page.id)
+
                 print("for " + str(page.id))
                 print([str(meme) for meme in current_slots])
                         
             print("done: " + str(slot.size))
             
 
+class LRUHandler:
+    def __init__(self):
+        self.page_list = PageHandler().create_pages()
+        self.slots = PageHandler().create_slots()
+        self.ticker = Ticker()
+
+    def simulation(self):
+        for slot in self.slots: # for each possible slot size
+            current_slots = []
+
+            for page in self.page_list: 
+                if not slot.size > len(current_slots):
+                    if page.id in current_slots:
+                        current_slots.remove(page.id)
+                    
+                    else:
+                        current_slots.pop(0)
+                        
+                current_slots.append(page.id)
+
+
+
+                print("for " + str(page.id))
+                print([str(meme) for meme in current_slots])
+                        
+            print("done: " + str(slot.size))
+
 
 
 
 def main():    
     FIFOHandler().simulation()
-
+    LRUHandler().simulation()
 main()
 # class Processor

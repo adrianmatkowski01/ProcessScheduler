@@ -64,12 +64,13 @@ class FIFOHandler:
 
                 self.ticker.tick()
 
-                # print("for " + str(page.id))
+                print("for " + str(page.id))
                 # print([str(meme) for meme in current_slots])
+                print(current_slots)
                         
             # print("done: " + str(slot.size))
-            print("For slot: " + str(slot.size))
-            print(swap_amount)
+            # print("For slot: " + str(slot.size))
+            # print(swap_amount)
             
 
 class LRUHandler:
@@ -99,12 +100,13 @@ class LRUHandler:
 
 
 
-                # print("for " + str(page.id))
+                print("for " + str(page.id))
                 # print([str(meme) for meme in current_slots])
+                print(current_slots)
                         
             # print("done: " + str(slot.size))
-            print("For slot: " + str(slot.size))
-            print(swap_amount)
+            # print("For slot: " + str(slot.size))
+            # print(swap_amount)
 
 
 

@@ -1,15 +1,6 @@
 import data_handler
 import matplotlib.pyplot
 
-class Ticker:
-    def __init__(self):
-        self.time_elapsed = 0
-
-    def tick(self):
-        self.time_elapsed += 1
-
-
-
 class Page:
     def __init__(self, id):
         self.id = id
@@ -41,14 +32,13 @@ class FIFOHandler:
     def __init__(self):
         self.page_list = PageHandler().create_pages()
         self.slots = PageHandler().create_slots()
-        self.ticker = Ticker()
+        self.data = []
 
     def simulation(self):
         for slot in self.slots: # for each possible slot size
             current_slots = []
             swap_amount = 0
             for page in self.page_list:
-
                 if slot.size > len(current_slots):
                     if page.id not in current_slots:
                         current_slots.append(page.id)
@@ -58,26 +48,15 @@ class FIFOHandler:
                         current_slots.pop(0)
                         swap_amount += 1
                         current_slots.append(page.id)
-                    
-
-
-
-                self.ticker.tick()
-
-                print("for " + str(page.id))
-                # print([str(meme) for meme in current_slots])
-                print(current_slots)
-                        
-            # print("done: " + str(slot.size))
-            # print("For slot: " + str(slot.size))
-            # print(swap_amount)
+            self.data.append({slot.size: swap_amount})
+        Data().export_data(self.data, __class__.__name__)
             
 
 class LRUHandler:
     def __init__(self):
         self.page_list = PageHandler().create_pages()
         self.slots = PageHandler().create_slots()
-        self.ticker = Ticker()
+        self.data = []
 
     def simulation(self):
         for slot in self.slots: # for each possible slot size
@@ -96,20 +75,18 @@ class LRUHandler:
                 else:
                     if page.id not in current_slots:
                         current_slots.append(page.id)
-                self.ticker.tick()
+            self.data.append({slot.size: swap_amount})
+        Data().export_data(self.data, __class__.__name__)
+        
 
+class Data:
+    def __init__(self):
+        self.data = data_handler.read_data("page_data.json")
 
-
-                print("for " + str(page.id))
-                # print([str(meme) for meme in current_slots])
-                print(current_slots)
-                        
-            # print("done: " + str(slot.size))
-            # print("For slot: " + str(slot.size))
-            # print(swap_amount)
-
-
-
+    def export_data(self, output_data, file_name):
+        self.data["swap_amount"] = output_data
+        data_handler.write_data(self.data, file_name)
+        
 
 def main():    
     print("FIFO")
@@ -117,4 +94,3 @@ def main():
     print("LRU")
     LRUHandler().simulation()
 main()
-# class Processor

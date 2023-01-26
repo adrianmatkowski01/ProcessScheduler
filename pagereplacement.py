@@ -1,4 +1,5 @@
 import data_handler
+import matplotlib.pyplot
 
 class Ticker:
     def __init__(self):
@@ -49,7 +50,8 @@ class FIFOHandler:
             for page in self.page_list:
 
                 if slot.size > len(current_slots):
-                    current_slots.append(page.id)
+                    if page.id not in current_slots:
+                        current_slots.append(page.id)
                     
                 else:
                     if page.id not in current_slots:

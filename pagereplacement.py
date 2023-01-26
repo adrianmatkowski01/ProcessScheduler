@@ -45,20 +45,29 @@ class FIFOHandler:
     def simulation(self):
         for slot in self.slots: # for each possible slot size
             current_slots = []
-
+            swap_amount = 0
             for page in self.page_list:
-                
-                if not slot.size > len(current_slots):
 
+                if slot.size > len(current_slots):
+                    current_slots.append(page.id)
+                    
+                else:
                     if page.id not in current_slots:
                         current_slots.pop(0)
+                        swap_amount += 1
+                        current_slots.append(page.id)
+                    
 
-                current_slots.append(page.id)
 
-                print("for " + str(page.id))
-                print([str(meme) for meme in current_slots])
+
+                self.ticker.tick()
+
+                # print("for " + str(page.id))
+                # print([str(meme) for meme in current_slots])
                         
-            print("done: " + str(slot.size))
+            # print("done: " + str(slot.size))
+            print("For slot: " + str(slot.size))
+            print(swap_amount)
             
 
 class LRUHandler:
@@ -70,7 +79,7 @@ class LRUHandler:
     def simulation(self):
         for slot in self.slots: # for each possible slot size
             current_slots = []
-
+            swap_amount = 0
             for page in self.page_list: 
                 if not slot.size > len(current_slots):
                     if page.id in current_slots:
@@ -78,21 +87,27 @@ class LRUHandler:
                     
                     else:
                         current_slots.pop(0)
+                        swap_amount += 1
                         
                 current_slots.append(page.id)
+                self.ticker.tick()
 
 
 
-                print("for " + str(page.id))
-                print([str(meme) for meme in current_slots])
+                # print("for " + str(page.id))
+                # print([str(meme) for meme in current_slots])
                         
-            print("done: " + str(slot.size))
+            # print("done: " + str(slot.size))
+            print("For slot: " + str(slot.size))
+            print(swap_amount)
 
 
 
 
 def main():    
+    print("FIFO")
     FIFOHandler().simulation()
+    print("LRU")
     LRUHandler().simulation()
 main()
 # class Processor

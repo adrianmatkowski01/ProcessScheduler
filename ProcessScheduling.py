@@ -65,34 +65,6 @@ class Processor:
         self.ticker = Ticker()
         self.time = 0
 
-    # def process_fcfs(self):
-    #     fcfs = FCFSHandler().sort_processes()
-    #     fcfs_data = Data(fcfs, FCFSHandler.__name__)
-    #     for process in fcfs:
-    #         timer = 0
-    #         while self.ticker.time() < process.process_arrival():
-    #             self.ticker.tick()
-    #         fcfs_data.wait_time_parser(process, self.ticker)
-    #         while timer < process.process_length():
-    #             self.ticker.tick()
-    #             timer += 1
-    #         self.time += timer
-    #     fcfs_data.data_exporter(self.time)    
-
-    # def process_lcfs(self):
-    #     lcfs = LCFSHandler().sort_processes()
-    #     lcfs_data = Data(lcfs, lcfs.__class__.__name__)
-    #     for process in lcfs:
-    #         timer = 0
-    #         while self.ticker.time() < process.process_arrival():
-    #             self.ticker.tick()
-    #         lcfs_data.wait_time_parser(process, self.ticker)
-    #         while timer < process.process_length():
-    #             self.ticker.tick()
-    #             timer += 1
-    #         self.time += timer
-    #     lcfs_data.data_exporter(self.time)    
-
     def chooser(self, mode):
         if mode == "fcfs":
             self.process_algorythm(FCFSHandler())
@@ -111,7 +83,8 @@ class Processor:
                 self.ticker.tick()
                 timer += 1
             self.time += timer
-        algorythm_data.data_exporter(self.time)    
+        algorythm_data.total_time_export(self.time)
+        algorythm_data.average_wait_time()
             
 
 
@@ -126,8 +99,19 @@ class Data:
             if x['process_id'] == process.name():
                 x['wait_time'] = wait_time
 
-    def data_exporter(self, total_time):
+    def total_time_export(self, total_time):
         self.json_processes.append({"total_time": total_time})
+        self.to_json()
+
+    def average_wait_time(self):
+        sum = 0
+        counter = 0
+        for x in self.json_processes:
+            if "wait_time" in x: 
+                sum += x['wait_time']
+                counter += 1
+        time = sum/counter
+        self.json_processes.append({"average_wait_time": time})
         self.to_json()
 
     def to_json(self):
@@ -145,22 +129,3 @@ def test():
     # Data.to_json()
 
 test()
-
-
-
-# def main():
-#     pass
-
-    
-
-
-
-# if __name__ == "__main__":
-#     main()
-
-# comment="""
-# statistics:
-# export how long has it been since scheduling the process until execution
-
-
-# """

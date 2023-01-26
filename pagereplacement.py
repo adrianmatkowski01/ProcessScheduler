@@ -86,12 +86,15 @@ class LRUHandler:
                 if not slot.size > len(current_slots):
                     if page.id in current_slots:
                         current_slots.remove(page.id)
+                        current_slots.append(page.id)
                     
                     else:
                         current_slots.pop(0)
+                        current_slots.append(page.id)
                         swap_amount += 1
-                        
-                current_slots.append(page.id)
+                else:
+                    if page.id not in current_slots:
+                        current_slots.append(page.id)
                 self.ticker.tick()
 
 

@@ -3,14 +3,24 @@
 Preparation time 5 minutes
 Cooking time 30 minutes
 ## Ingredients
+•    matplotlib
+
 •	 low-calorie spray oil
+
 •	 1 small onion, finely chopped
+
 •	 250g (2 small) carrots, peeled and cut into small dices
+
 •	 500g extra lean minced steak
+
 •	 400g (1 can) chopped tomatoes
+
 •	 300ml beef stock (made with 1 low-salt beef stock cube)
+
 •	 2 cloves of garlic, crushed
+
 •	 4 tablespoons tomato purée
+
 •	 freshly ground black pepper
 ## To serve
 •	 300g dried spaghetti

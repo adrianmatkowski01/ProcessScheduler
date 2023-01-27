@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use("svg")
 import matplotlib.pyplot as plt
 import os
 import sys
@@ -24,7 +26,7 @@ ax.bar(lru_key, lru_value, label='LRU')
 ax.bar(fifo_key, fifo_value, label='FIFO', width=0.4, align="edge")
 ax.legend()
 plt.yscale("log")
-plt.show()
+# plt.show()
 
 plt.savefig("plots/output/pages.svg")
 

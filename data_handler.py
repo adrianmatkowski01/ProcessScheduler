@@ -5,5 +5,9 @@ def read_data(data_path):
         return json.load(f)
 
 def write_data(data, name):
-    with open(name + ".json", "w") as f:
+    with open("output/" + name + ".json", "w") as f:
+        json.dump(data, f, indent=4)
+
+def generator_data(data, name):
+    with open("input/" + name + ".json", "w") as f:
         json.dump(data, f, indent=4)

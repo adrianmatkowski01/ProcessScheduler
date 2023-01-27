@@ -1,5 +1,6 @@
 import data_handler
-
+import sys
+import os
 
 class Ticker: # Thread?
     def __init__(self):
@@ -32,7 +33,21 @@ class ProcessHandler:
         self.processes = []
 
     def create_processes(self):
-        data = data_handler.read_data("process_data.json")
+        if len(sys.argv) > 1:
+            if sys.argv[1].endswith(".json"):
+                if os.path.exists("input/" + sys.argv[1]):
+                    data = data_handler.read_data("input/" + sys.argv[1])
+                else:
+                    print("That file doesn't exist in the input/ folder.")
+                    exit(-1)
+            else:
+                print("Please provide a file path ending in '.json'.")
+                exit(-1)
+        else:
+            print("No input file given.")
+            exit(-1)
+
+
         for process in data:
             process_id = process['process_id']
             arrival_time = process['arrival_time']
@@ -69,6 +84,9 @@ class Processor:
         if mode == "fcfs":
             self.process_algorythm(FCFSHandler())
         elif mode == "lcfs":
+            self.process_algorythm(LCFSHandler())
+        elif mode == "all":
+            self.process_algorythm(FCFSHandler())
             self.process_algorythm(LCFSHandler())
 
     def process_algorythm(self, algorythm_obj):
@@ -117,15 +135,8 @@ class Data:
     def to_json(self):
         data_handler.write_data(self.json_processes, self.class_name)
 
-
-
-    # def set_length(self, length):
-    #     self.length = length
-
-
 def test():
-    Processor().chooser("lcfs")
-    Processor().chooser("fcfs")
-    # Data.to_json()
+    Processor().chooser("all")
+    print("Done!")
 
 test()

@@ -1,3 +1,8 @@
+import os
+import sys
+dir_path = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(dir_path, os.pardir))
+sys.path.append(parent_dir)
 import data_handler
 import random
 
@@ -17,5 +22,5 @@ sample_range = int(input("What should the sample range be: "))
 for x in range(1, int(sample_size)+1):
     data["id_set"].extend([random.randint(1, sample_range)])
 
-data_handler.write_data(data, output_name)
+data_handler.generator_data(data, output_name)
 

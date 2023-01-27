@@ -27,5 +27,5 @@ ax2.bar(["FCFS", "LCFS"], [fcfs_average_time, lcfs_average_time], width=0.4)
 ax2.set_ylabel("Wait Time")
 ax2.set_title("Wait Time Comparison")
 plt.show()
-
+plt.savefig("plots/output/process.svg")
 

@@ -105,8 +105,6 @@ class Data:
         
 
 def main():    
-    print("FIFO")
     FIFOHandler().simulation()
-    print("LRU")
     LRUHandler().simulation()
 main()

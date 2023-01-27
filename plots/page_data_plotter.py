@@ -26,4 +26,5 @@ ax.legend()
 plt.yscale("log")
 plt.show()
 
+plt.savefig("plots/output/pages.svg")
 
